@@ -77,8 +77,8 @@ fn default_local(time: SystemTime) -> String {
     let date = LocalDateTime::at(systemtime_epoch(time));
 
     if date.year() == *CURRENT_YEAR {
-        format!("{:2} {} {:02}:{:02}",
-                date.day(), month_to_abbrev(date.month()),
+        format!("{} {:02} {:02}:{:02}",
+                month_to_abbrev(date.month()), date.day(),
                 date.hour(), date.minute())
     }
     else {
@@ -97,8 +97,8 @@ fn default_zoned(time: SystemTime, zone: &TimeZone) -> String {
     let date = zone.to_zoned(LocalDateTime::at(systemtime_epoch(time)));
 
     if date.year() == *CURRENT_YEAR {
-        format!("{:2} {} {:02}:{:02}",
-                date.day(), month_to_abbrev(date.month()),
+        format!("{} {:2} {:02}:{:02}",
+                month_to_abbrev(date.month()), date.day(),
                 date.hour(), date.minute())
     }
     else {
@@ -250,26 +250,26 @@ lazy_static! {
     };
 
     static ref FOUR_WIDE_DATE_TIME: DateFormat<'static> = DateFormat::parse(
-        "{2>:D} {4<:M} {2>:h}:{02>:m}"
+        "{4<:M} {2>:D} {2>:h}:{02>:m}"
     ).unwrap();
 
     static ref FIVE_WIDE_DATE_TIME: DateFormat<'static> = DateFormat::parse(
-        "{2>:D} {5<:M} {2>:h}:{02>:m}"
+        "{5<:M} {2>:D} {2>:h}:{02>:m}"
     ).unwrap();
 
     static ref OTHER_WIDE_DATE_TIME: DateFormat<'static> = DateFormat::parse(
-        "{2>:D} {:M} {2>:h}:{02>:m}"
+        "{:M} {2>:D} {2>:h}:{02>:m}"
     ).unwrap();
 
     static ref FOUR_WIDE_DATE_YEAR: DateFormat<'static> = DateFormat::parse(
-        "{2>:D} {4<:M} {5>:Y}"
+        "{4<:M} {2>:D} {5>:Y}"
     ).unwrap();
 
     static ref FIVE_WIDE_DATE_YEAR: DateFormat<'static> = DateFormat::parse(
-        "{2>:D} {5<:M} {5>:Y}"
+        "{5<:M} {2>:D} {5>:Y}"
     ).unwrap();
 
     static ref OTHER_WIDE_DATE_YEAR: DateFormat<'static> = DateFormat::parse(
-        "{2>:D} {:M} {5>:Y}"
+        "{:M} {2>:D} {5>:Y}"
     ).unwrap();
 }
